@@ -25,7 +25,7 @@
                 <UniformGrid Rows="1" DockPanel.Dock="Bottom">
                     <Button Content="Add"/>
                     <Button Content="Edit"/>
-                    <Button Content="Remove"/>
+                    <Button Content="Remove" Command="{Binding RemoveGlobalWordCommand}"/>
                 </UniformGrid>
                 <ListBox BorderThickness="1" BorderBrush="Blue" Margin="5"/>
             </DockPanel>

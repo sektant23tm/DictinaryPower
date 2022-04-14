@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\Debug\" />
     <Folder Include="Resources\" />
     <Folder Include="Services\Interfaces\" />
   </ItemGroup>

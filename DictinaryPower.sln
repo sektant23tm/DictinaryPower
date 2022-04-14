@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictinaryPower", "DictinaryPower\DictinaryPower.csproj", "{3F21F379-1519-4F38-BDA4-00DB563DD112}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictinaryPower.DAL", "DictinaryPower.DAL\DictinaryPower.DAL.csproj", "{3D7DF1C0-0898-40FF-A5C8-731FC615E25D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3F21F379-1519-4F38-BDA4-00DB563DD112}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F21F379-1519-4F38-BDA4-00DB563DD112}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F21F379-1519-4F38-BDA4-00DB563DD112}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D7DF1C0-0898-40FF-A5C8-731FC615E25D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D7DF1C0-0898-40FF-A5C8-731FC615E25D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7DF1C0-0898-40FF-A5C8-731FC615E25D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D7DF1C0-0898-40FF-A5C8-731FC615E25D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,9 @@
-﻿using DictinaryPower.ViewModels.Base;
+﻿using DictinaryPower.Infrastructure.Commands;
+using DictinaryPower.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace DictinaryPower.ViewModels
 {
@@ -32,6 +34,18 @@ namespace DictinaryPower.ViewModels
 
         #region Команды
 
+        #region Command : RemoveGlobalWordCommand - Удаление выделенного глобального слова
+        /// <summary>Удаление выделенного глобального слова</summary>
+        public ICommand RemoveGlobalWordCommand { get; }
+        /// <summary>Проверка возможности выполнения команды - Удаление выделенного глобального слова</summary>
+        public bool CanRemoveGlobalWordCommandExecute(object p) => false;
+        /// <summary>Логика выполнения - Удаление выделенного глобального слова</summary>
+        private void OnRemoveGlobalWordCommandExecuted(object p)
+        {
+
+        }
+        #endregion
+
         #endregion
 
         #region Сервисы
@@ -41,12 +55,14 @@ namespace DictinaryPower.ViewModels
         public MainWindowViewModel()
         {
             #region Инициализация команд
-
+            RemoveGlobalWordCommand = new LambdaCommand(OnRemoveGlobalWordCommandExecuted, CanRemoveGlobalWordCommandExecute);
             #endregion
 
             #region Инициализация сервисов
 
             #endregion
         }
+
+
     }
 }

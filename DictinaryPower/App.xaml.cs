@@ -13,6 +13,8 @@ namespace DictinaryPower
     /// </summary>
     public partial class App
     {
+        public static bool IsDesignMode { get; private set; } = true;
+
         private static IHost __host;
         //При обращении __host если == null ,то вроводим инициализацию
         public static IHost Host => __host ??= Program.CreateHostBuilder(Environment.GetCommandLineArgs()).Build();
@@ -28,6 +30,7 @@ namespace DictinaryPower
 
         protected override async void OnStartup(StartupEventArgs e)
         {
+            IsDesignMode = false;
             var host = Host;
             base.OnStartup(e);
             await host.StartAsync();
