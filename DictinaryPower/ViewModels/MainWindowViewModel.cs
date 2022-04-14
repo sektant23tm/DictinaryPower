@@ -1,8 +1,8 @@
-﻿using DictinaryPower.Infrastructure.Commands;
+﻿using DictinaryPower.DAL.Entitiyes;
+using DictinaryPower.Infrastructure.Commands;
+using DictinaryPower.Infrastructure.Debug;
 using DictinaryPower.ViewModels.Base;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
 namespace DictinaryPower.ViewModels
@@ -10,7 +10,7 @@ namespace DictinaryPower.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
         #region Сервисы
-
+        private readonly DebugRepositoryGlobalWordServvice _debugGlobalWordService;
         #endregion
 
         #region Константы
@@ -30,6 +30,28 @@ namespace DictinaryPower.ViewModels
         }
         #endregion
 
+        #region DebugGlobalWordCollection : IEnumerable<GlobalWord> - Коллекция слов-примернов чтобы успешно дебажить визуальную часть
+        /// <summary>Коллекция слов-примернов чтобы успешно дебажить визуальную часть</summary>
+        private IEnumerable<GlobalWord> _DebugGlobalWordCollection;
+        /// <summary>Коллекция слов-примернов чтобы успешно дебажить визуальную часть</summary>
+        public IEnumerable<GlobalWord> DebugGlobalWordCollection
+        {
+            get => _DebugGlobalWordCollection;
+            set => Set(ref _DebugGlobalWordCollection, value);
+        }
+        #endregion
+
+        #region SelectedGlobalWord : GlobalWord - Выбранный в основном листБоксе GlobalWord
+        /// <summary>Выбранный в основном листБоксе GlobalWord</summary>
+        private GlobalWord _SelectedGlobalWord;
+        /// <summary>Выбранный в основном листБоксе GlobalWord</summary>
+        public GlobalWord SelectedGlobalWord
+        {
+            get => _SelectedGlobalWord;
+            set => Set(ref _SelectedGlobalWord, value);
+        }
+        #endregion
+
         #endregion
 
         #region Команды
@@ -38,7 +60,7 @@ namespace DictinaryPower.ViewModels
         /// <summary>Удаление выделенного глобального слова</summary>
         public ICommand RemoveGlobalWordCommand { get; }
         /// <summary>Проверка возможности выполнения команды - Удаление выделенного глобального слова</summary>
-        public bool CanRemoveGlobalWordCommandExecute(object p) => false;
+        public bool CanRemoveGlobalWordCommandExecute(object p) => SelectedGlobalWord is not null;
         /// <summary>Логика выполнения - Удаление выделенного глобального слова</summary>
         private void OnRemoveGlobalWordCommandExecuted(object p)
         {
@@ -59,7 +81,8 @@ namespace DictinaryPower.ViewModels
             #endregion
 
             #region Инициализация сервисов
-
+            _debugGlobalWordService = new DebugRepositoryGlobalWordServvice();
+            DebugGlobalWordCollection = _debugGlobalWordService.Items;
             #endregion
         }
 

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:DictinaryPower"   
         xmlns:vm="clr-namespace:DictinaryPower.ViewModels"  
+        xmlns:dal="clr-namespace:DictinaryPower.DAL.Entitiyes;assembly=DictinaryPower.DAL"  
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
         Title="{Binding Title}" 
         Height="450" 
@@ -27,7 +28,17 @@
                     <Button Content="Edit"/>
                     <Button Content="Remove" Command="{Binding RemoveGlobalWordCommand}"/>
                 </UniformGrid>
-                <ListBox BorderThickness="1" BorderBrush="Blue" Margin="5"/>
+                <ListBox 
+                    ItemsSource="{Binding DebugGlobalWordCollection}"
+                    BorderThickness="1" 
+                    BorderBrush="Blue" 
+                    Margin="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type dal:GlobalWord}">
+                            <TextBlock Text="{Binding Value}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </DockPanel>
 
             <ListBox Grid.Column="1" Margin="10" BorderThickness="1" BorderBrush="Black"/>
