@@ -30,6 +30,8 @@
                 </UniformGrid>
                 <ListBox 
                     ItemsSource="{Binding DebugGlobalWordCollection}"
+                    SelectedItem="{Binding SelectedGlobalWord}"
+                    SelectedIndex="0"
                     BorderThickness="1" 
                     BorderBrush="Blue" 
                     Margin="5">
@@ -41,8 +43,9 @@
                 </ListBox>
             </DockPanel>
 
-            <ListBox Grid.Column="1" Margin="10" BorderThickness="1" BorderBrush="Black"/>
- 
+            <ListBox Grid.Column="1" Margin="10" BorderThickness="1" BorderBrush="Black">
+            </ListBox>
+
         </Grid>
         
     </DockPanel>

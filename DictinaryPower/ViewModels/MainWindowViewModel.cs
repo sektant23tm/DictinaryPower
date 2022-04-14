@@ -3,6 +3,7 @@ using DictinaryPower.Infrastructure.Commands;
 using DictinaryPower.Infrastructure.Debug;
 using DictinaryPower.ViewModels.Base;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace DictinaryPower.ViewModels
@@ -83,6 +84,7 @@ namespace DictinaryPower.ViewModels
             #region Инициализация сервисов
             _debugGlobalWordService = new DebugRepositoryGlobalWordServvice();
             DebugGlobalWordCollection = _debugGlobalWordService.Items;
+            SelectedGlobalWord = DebugGlobalWordCollection.ToArray()[0];
             #endregion
         }
 
