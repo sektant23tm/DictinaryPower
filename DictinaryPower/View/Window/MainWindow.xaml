@@ -9,7 +9,30 @@
         Title="{Binding Title}" 
         Height="450" 
         Width="800">
-    <Grid>
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="Статус"/>
+        </StatusBar>
 
-    </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <DockPanel Grid.Column="0">
+                <TextBox Text="Строка поиска" DockPanel.Dock="Top" BorderThickness="1" BorderBrush="Pink" Margin="5"/>
+                <UniformGrid Rows="1" DockPanel.Dock="Bottom">
+                    <Button Content="Add"/>
+                    <Button Content="Edit"/>
+                    <Button Content="Remove"/>
+                </UniformGrid>
+                <ListBox BorderThickness="1" BorderBrush="Blue" Margin="5"/>
+            </DockPanel>
+
+            <ListBox Grid.Column="1" Margin="10" BorderThickness="1" BorderBrush="Black"/>
+ 
+        </Grid>
+        
+    </DockPanel>
 </Window>
