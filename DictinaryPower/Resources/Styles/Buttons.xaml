@@ -1,4 +1,171 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:fa="http://schemas.fontawesome.com/icons/">
     
+    <Style x:Key="FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="GlobalWordAddButtonTemplate" TargetType="{x:Type Button}">
+        <Border x:Name="border" CornerRadius="5"
+                                Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                SnapsToDevicePixels="true">
+            <DockPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                       Margin="{TemplateBinding Padding}">
+                <fa:ImageAwesome Height="12" Icon="Solid_Check" Foreground="{TemplateBinding Foreground}" x:Name="Icon" Margin="0,0,3,0" Effect="{StaticResource ShadowDepth1}"/>
+                <ContentPresenter x:Name="contentPresenter" 
+                                  Focusable="False" 
+                                  RecognizesAccessKey="True" 
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+            </DockPanel>
+        </Border>
+        <ControlTemplate.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="true">
+
+                <Setter Property="Background" TargetName="border" Value="#FF362AEB"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF7ACDEB"/>
+                <Setter Property="Foreground" TargetName="Icon" Value="White"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>
+
+            </Trigger>
+
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" TargetName="border" Value="#FF1A23EB"/>
+                <Setter Property="Foreground" TargetName="Icon" Value="#FF007307"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="DarkGray"/>
+                <Setter Property="Foreground" TargetName="Icon" Value="Gray"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="GlobalWordEditButtonTemplate" TargetType="{x:Type Button}">
+        <Border x:Name="border" CornerRadius="5"
+                                Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                SnapsToDevicePixels="true">
+            <DockPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                       Margin="{TemplateBinding Padding}">
+                <fa:ImageAwesome Height="12" Icon="Regular_Edit" Foreground="{TemplateBinding Foreground}" x:Name="Icon" Margin="0,0,3,0" Effect="{StaticResource ShadowDepth1}"/>
+                <ContentPresenter x:Name="contentPresenter" 
+                                  Focusable="False" 
+                                  RecognizesAccessKey="True" 
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+            </DockPanel>
+        </Border>
+        <ControlTemplate.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="true">
+
+                <Setter Property="Background" TargetName="border" Value="#FF412C84"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF200772"/>
+                <Setter Property="Foreground" TargetName="Icon" Value="White"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>
+
+            </Trigger>
+
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" TargetName="border" Value="#FF200772"/>
+                <Setter Property="Foreground" TargetName="Icon" Value="#FFFFD300"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="DarkGray"/>
+                <Setter Property="Foreground" TargetName="Icon" Value="Gray"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="GlobalWordRemoveButtonTemplate" TargetType="{x:Type Button}">
+        <Border x:Name="border" CornerRadius="5"
+                                Background="{TemplateBinding Background}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                SnapsToDevicePixels="true">
+            <DockPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                       Margin="{TemplateBinding Padding}">
+                <fa:ImageAwesome Height="12" Icon="Solid_Times" Foreground="{TemplateBinding Foreground}" x:Name="Icon" Margin="0,0,3,0" Effect="{StaticResource ShadowDepth1}"/>
+                <ContentPresenter x:Name="contentPresenter" 
+                                  Focusable="False" 
+                                  RecognizesAccessKey="True" 
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+            </DockPanel>
+        </Border>
+        <ControlTemplate.Triggers>
+
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" TargetName="border" Value="#FFD84429"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FFA61A00"/>
+                <Setter Property="Foreground" TargetName="Icon" Value="White"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>
+            </Trigger>
+
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" TargetName="border" Value="#FFFF2800"/>
+                <Setter Property="Foreground" TargetName="Icon" Value="Black"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="BorderBrush" TargetName="border" Value="DarkGray"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="DarkGray"/>
+                <Setter Property="Foreground" TargetName="Icon" Value="Gray"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="GlobalWordAddButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="Foreground" Value="#FF03A762"/>
+        <Setter Property="Margin" Value="4,4"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0,7"/>
+        <Setter Property="Template" Value="{StaticResource GlobalWordAddButtonTemplate}"/>
+    </Style>
+
+    <Style x:Key="GlobalWordEditButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="Foreground" Value="#FFBFA730"/>
+        <Setter Property="Margin" Value="4,4"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0,7"/>
+        <Setter Property="Template" Value="{StaticResource GlobalWordEditButtonTemplate}"/>
+    </Style>
+
+    <Style x:Key="GlobalWordRemoveButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="Foreground" Value="#FFA61A00"/>
+        <Setter Property="Margin" Value="4,4"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0,7"/>
+        <Setter Property="Template" Value="{StaticResource GlobalWordRemoveButtonTemplate}"/>
+    </Style>
 </ResourceDictionary>
