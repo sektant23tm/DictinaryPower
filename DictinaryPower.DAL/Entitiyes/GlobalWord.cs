@@ -9,9 +9,6 @@ namespace DictinaryPower.DAL.Entitiyes
         public virtual string Value { get; set; }
 
         /// <summary>Транскрипция</summary>
-        public virtual string Transcription { get; set; }
-
-        /// <summary>Транскрипция</summary>
         public virtual ICollection<Word> Words { get; set; }
     }
 }

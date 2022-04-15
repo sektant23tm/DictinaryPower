@@ -42,6 +42,17 @@ namespace DictinaryPower.ViewModels
         }
         #endregion
 
+        #region DebugPartOfSpeechCollection : Ienumerable<partOfSpeech> - Коллекция частей речи , чтобы успешно дебажить визуальную часть
+        /// <summary>Коллекция частей речи , чтобы успешно дебажить визуальную часть</summary>
+        private IEnumerable<PartOfSpeech> _DebugPartOfSpeechCollection;
+        /// <summary>Коллекция частей речи , чтобы успешно дебажить визуальную часть</summary>
+        public IEnumerable<PartOfSpeech> DebugPartOfSpeechCollection
+        {
+            get => _DebugPartOfSpeechCollection;
+            set => Set(ref _DebugPartOfSpeechCollection, value);
+        }
+        #endregion
+
         #region SelectedGlobalWord : GlobalWord - Выбранный в основном листБоксе GlobalWord
         /// <summary>Выбранный в основном листБоксе GlobalWord</summary>
         private GlobalWord _SelectedGlobalWord;
@@ -65,7 +76,7 @@ namespace DictinaryPower.ViewModels
         /// <summary>Логика выполнения - Удаление выделенного глобального слова</summary>
         private void OnRemoveGlobalWordCommandExecuted(object p)
         {
-
+           
         }
         #endregion
 
@@ -84,6 +95,7 @@ namespace DictinaryPower.ViewModels
             #region Инициализация сервисов
             _debugGlobalWordService = new DebugRepositoryGlobalWordServvice();
             DebugGlobalWordCollection = _debugGlobalWordService.Items;
+            DebugPartOfSpeechCollection = _debugGlobalWordService.PartOfSpeeches;
             SelectedGlobalWord = DebugGlobalWordCollection.ToArray()[0];
             #endregion
         }

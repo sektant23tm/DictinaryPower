@@ -8,49 +8,34 @@ namespace DictinaryPower.Infrastructure.Debug
     {
         public IEnumerable<GlobalWord> Items { get; }
 
+        public IEnumerable<PartOfSpeech> PartOfSpeeches { get; }
+
         public DebugRepositoryGlobalWordServvice()
         {
+            PartOfSpeeches = new List<PartOfSpeech>()
+            {
+                 new PartOfSpeech { Name = "Noun" },
+                 new PartOfSpeech { Name = "Verb" },
+                 new PartOfSpeech { Name = "Adjective" },
+                 new PartOfSpeech { Name = "Pronoun" },
+                 new PartOfSpeech { Name = "Numeral" },
+                 new PartOfSpeech { Name = "Adverb" },
+                 new PartOfSpeech { Name = "Preposition" },
+                 new PartOfSpeech { Name = "Conjunction" },
+                 new PartOfSpeech { Name = "Particle" }
+            };
+
             Items = new List<GlobalWord>()
             {
                 new GlobalWord
                 {
-                    Value = "do",
-                    Transcription = "duː",
-                    Words = new List<Word>()
-                    {
-                        new Word
-                        {
-                              Value = "do",
-                              Forms = "did / done / doing / does" ,
-                              PartSpeech = new PartOfSpeech { Name = "Verb" },
-                              Translates = new List<Translate>()
-                              {
-                                  new Translate
-                                  {
-                                        Value = "делать",
-                                        ExampleSentences = new List<ExampleSentence>()
-                                        {
-                                            new ExampleSentence
-                                            {
-                                                EnglishSentence = "We don't do that.",
-                                                RussianSentence= "Мы этого не делаем."
-                                            }
-                                        }
-                                  }
-                              }
-                        }
-                    }
-                },
-                new GlobalWord
-                {
                     Value = "first",
-                    Transcription = "fɜːrst",
                     Words= new List<Word>()
                     {
                         new Word
                         {
                             Value = "first",
-                            PartSpeech = new PartOfSpeech { Name = "Adjective" },
+                            PartSpeech = PartOfSpeeches.ToArray()[2],
                             Translates = new List<Translate>()
                             {
                                 new Translate
@@ -89,7 +74,7 @@ namespace DictinaryPower.Infrastructure.Debug
                         new Word
                         {
                             Value = "first",
-                            PartSpeech = new PartOfSpeech { Name = "Adverb" },
+                            PartSpeech = PartOfSpeeches.ToArray()[5],
                             Translates = new List<Translate>()
                             {
                                 new Translate
@@ -100,8 +85,38 @@ namespace DictinaryPower.Infrastructure.Debug
                             
                         }
                     }
+                },
+                new GlobalWord
+                {
+                    Value = "do",
+                    Words = new List<Word>()
+                    {
+                        new Word
+                        {
+                              Value = "do",
+                              Forms = "did / done / doing / does" ,
+                              Transcription = "ˈkɜːrənt",
+                              PartSpeech = PartOfSpeeches.ToArray()[1],
+                              Translates = new List<Translate>()
+                              {
+                                  new Translate
+                                  {
+                                        Value = "делать",
+                                        ExampleSentences = new List<ExampleSentence>()
+                                        {
+                                            new ExampleSentence
+                                            {
+                                                EnglishSentence = "We don't do that.",
+                                                RussianSentence= "Мы этого не делаем."
+                                            }
+                                        }
+                                  }
+                              }
+                        }
+                    }
                 }
             };
+
         }
     }
 }

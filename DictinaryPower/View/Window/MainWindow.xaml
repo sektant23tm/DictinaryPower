@@ -43,8 +43,78 @@
                 </ListBox>
             </DockPanel>
 
-            <ListBox Grid.Column="1" Margin="10" BorderThickness="1" BorderBrush="Black">
-            </ListBox>
+            <ItemsControl Grid.Column="1" 
+                          Background="#FF71ABDE"
+                          Margin="5"
+                          BorderThickness="1" 
+                          BorderBrush="Black" 
+                          ItemsSource="{Binding SelectedGlobalWord.Words}">
+                <ItemsControl.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </ItemsControl.Resources>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type dal:Word}">
+                        <Border BorderThickness="0.25" BorderBrush="Blue" Margin="5" CornerRadius="2" Background="White">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding Value}" 
+                                             Margin="7,5,2,5" 
+                                             FontWeight="Medium"/>
+                                    
+                                    <TextBox Text="{Binding Transcription , StringFormat='[{0}]' , TargetNullValue='[- empty -]'}" 
+                                             Margin="4,5,2,5" />
+
+                                    <ComboBox Margin="4,3" BorderThickness="0" 
+                                              ItemsSource="{Binding MainWindowViewModel.DebugPartOfSpeechCollection, Source={StaticResource Locator}}"
+                                              SelectedItem="{Binding PartSpeech}">
+
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate DataType="{x:Type dal:PartOfSpeech}">
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </StackPanel>
+                                <Border BorderThickness="0,1,0,0" BorderBrush="Gray"/>
+                                
+                                <TextBox Text="{Binding Forms , TargetNullValue='- empty -'}" 
+                                         Margin="7,2,2,5" 
+                                         FontStyle="Italic"/>
+
+                                <ItemsControl ItemsSource="{Binding Translates}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type dal:Translate}">
+                                            <StackPanel>
+                                                <TextBox Text="{Binding Value}"
+                                                          Margin="7,5,2,5"
+                                                          FontWeight="Medium"/>
+                                                <StackPanel>
+                                                    <ItemsControl ItemsSource="{Binding ExampleSentences}">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate DataType="{x:Type dal:ExampleSentence}">
+                                                                <StackPanel>
+                                                                    <TextBox Text="{Binding EnglishSentence , StringFormat='- {0}'}"
+                                                                             Margin="5,4,2,0"/>
+                                                                    <TextBox Text="{Binding RussianSentence , StringFormat='- {0}'}"
+                                                                             Margin="5,0,2,5"/>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                
+            </ItemsControl>
 
         </Grid>
         
