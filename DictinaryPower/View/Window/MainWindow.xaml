@@ -6,32 +6,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:DictinaryPower"   
         xmlns:vm="clr-namespace:DictinaryPower.ViewModels"  
+        xmlns:ext="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:dal="clr-namespace:DictinaryPower.DAL.Entitiyes;assembly=DictinaryPower.DAL"  
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
         Title="{Binding Title}" 
         Height="450" 
-        Width="800">
-    <DockPanel>
+        Width="800"
+        MinWidth="650">
+    <Window.Resources>
+        <Run Text="Test" x:Key="Bobo"/>
+    </Window.Resources>
+    <DockPanel Background="#FF479BD0">
+        
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock Text="Статус"/>
         </StatusBar>
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="250" MinWidth="250"/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <DockPanel Grid.Column="0">
                 <DockPanel DockPanel.Dock="Top">
-                    <fa:ImageAwesome Icon="Solid_Search" Height="15" Margin="5,1,5,1" Foreground="#FF0C2E98"/>
-                    <TextBox BorderThickness="1" BorderBrush="Pink" Margin="5" DockPanel.Dock="Right" Text="Строка поиска"/>
-
-
-
-
+                    <fa:ImageAwesome Icon="Solid_Search" Height="15" Margin="8,1,5,1" Foreground="#FF0C2E98"/>
+                    <ext:WatermarkTextBox Watermark="Строка поиска" BorderThickness="1" BorderBrush="Gray" Margin="5" DockPanel.Dock="Right"/>
                 </DockPanel>
-                <UniformGrid Rows="1" DockPanel.Dock="Bottom">
+                <UniformGrid Rows="1" DockPanel.Dock="Bottom" Margin="0 0 0 4">
                     <Button Content="Add"  Style="{DynamicResource GlobalWordAddButtonStyle}"/>
                     <Button Content="Edit" Style="{DynamicResource GlobalWordEditButtonStyle}"/>
                     <Button Content="Remove" Style="{DynamicResource GlobalWordRemoveButtonStyle}" Command="{Binding RemoveGlobalWordCommand}"/>
@@ -40,8 +42,6 @@
                     ItemsSource="{Binding DebugGlobalWordCollection}"
                     SelectedItem="{Binding SelectedGlobalWord}"
                     SelectedIndex="0"
-                    BorderThickness="1" 
-                    BorderBrush="Blue" 
                     Margin="5">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type dal:GlobalWord}">
@@ -51,80 +51,80 @@
                 </ListBox>
             </DockPanel>
 
-            <ItemsControl Grid.Column="1" 
-                          Background="#FF71ABDE"
+            <ScrollViewer  Grid.Column="1" 
+                           VerticalScrollBarVisibility="Auto">
+                <ItemsControl
                           Margin="5"
-                          BorderThickness="1" 
-                          BorderBrush="Black" 
                           ItemsSource="{Binding SelectedGlobalWord.Words}">
-                <ItemsControl.Resources>
-                    <Style TargetType="TextBox">
-                        <Setter Property="BorderThickness" Value="0"/>
-                    </Style>
-                </ItemsControl.Resources>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type dal:Word}">
-                        <Border BorderThickness="0.25" BorderBrush="Blue" Margin="5" CornerRadius="2" Background="White">
-                            <StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="{Binding Value}" 
+                    <ItemsControl.Resources>
+                        <Style TargetType="TextBox">
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </ItemsControl.Resources>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type dal:Word}">
+                            <Border BorderThickness="0.25" BorderBrush="Blue" Margin="5" CornerRadius="2" Background="White">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox Text="{Binding Value}" 
                                              Margin="7,5,2,5" 
                                              FontWeight="Medium"/>
-                                    
-                                    <TextBox Text="{Binding Transcription , StringFormat='[{0}]' , TargetNullValue='[- empty -]'}" 
+
+                                        <TextBox Text="{Binding Transcription , StringFormat='[{0}]' , TargetNullValue='[- empty -]'}" 
                                              Margin="4,5,2,5" />
 
-                                    <ComboBox Margin="4,3" BorderThickness="0" 
+                                        <ComboBox Margin="4,3" BorderThickness="0" Style="{StaticResource ComboBoxPartOfSpeechesStyle}"
                                               ItemsSource="{Binding MainWindowViewModel.DebugPartOfSpeechCollection, Source={StaticResource Locator}}"
                                               SelectedItem="{Binding PartSpeech}">
 
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate DataType="{x:Type dal:PartOfSpeech}">
-                                                <TextBlock Text="{Binding Name}"/>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                </StackPanel>
-                                <Border BorderThickness="0,1,0,0" BorderBrush="Gray"/>
-                                
-                                <TextBox Text="{Binding Forms , TargetNullValue='- empty -'}" 
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate DataType="{x:Type dal:PartOfSpeech}">
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <Border BorderThickness="0,1,0,0" BorderBrush="Gray"/>
+
+                                    <TextBox Text="{Binding Forms , TargetNullValue='- empty -'}" 
                                          Margin="7,2,2,5" 
                                          FontStyle="Italic"/>
 
-                                <ItemsControl ItemsSource="{Binding Translates}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel>
-                                                <TextBox Text="{Binding Value}"
+                                    <ItemsControl ItemsSource="{Binding Translates}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBox Text="{Binding Value}"
                                                           Margin="7,5,2,5"
                                                           FontWeight="Medium"/>
-                                                <StackPanel>
-                                                    <ItemsControl ItemsSource="{Binding ExampleSentences}">
-                                                        <ItemsControl.ItemTemplate>
-                                                            <DataTemplate DataType="{x:Type dal:ExampleSentence}">
-                                                                <StackPanel>
-                                                                    <TextBox Text="{Binding EnglishSentence , StringFormat='- {0}'}"
+                                                    <StackPanel>
+                                                        <ItemsControl ItemsSource="{Binding ExampleSentences}">
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate DataType="{x:Type dal:ExampleSentence}">
+                                                                    <StackPanel>
+                                                                        <TextBox Text="{Binding EnglishSentence , StringFormat='- {0}'}"
                                                                              Margin="5,4,2,0"/>
-                                                                    <TextBox Text="{Binding RussianSentence , StringFormat='- {0}'}"
+                                                                        <TextBox Text="{Binding RussianSentence , StringFormat='- {0}'}"
                                                                              Margin="5,0,2,5"/>
-                                                                </StackPanel>
-                                                            </DataTemplate>
-                                                        </ItemsControl.ItemTemplate>
-                                                    </ItemsControl>
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                    </StackPanel>
                                                 </StackPanel>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                                
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                
-            </ItemsControl>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+            </ScrollViewer>
 
         </Grid>
-        
+
     </DockPanel>
 </Window>

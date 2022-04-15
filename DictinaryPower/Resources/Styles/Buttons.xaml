@@ -61,7 +61,7 @@
             <DockPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                        Margin="{TemplateBinding Padding}">
-                <fa:ImageAwesome Height="12" Icon="Regular_Edit" Foreground="{TemplateBinding Foreground}" x:Name="Icon" Margin="0,0,3,0" Effect="{StaticResource ShadowDepth1}"/>
+                <fa:ImageAwesome Height="12" Icon="Solid_Edit" Foreground="{TemplateBinding Foreground}" x:Name="Icon" Margin="0,0,3,0" Effect="{StaticResource ShadowDepth1}"/>
                 <ContentPresenter x:Name="contentPresenter" 
                                   Focusable="False" 
                                   RecognizesAccessKey="True" 
@@ -133,7 +133,7 @@
     <Style x:Key="GlobalWordAddButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderBrush" Value="#FF797979"/>
         <Setter Property="Foreground" Value="#FF03A762"/>
         <Setter Property="Margin" Value="4,4"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -146,8 +146,8 @@
     <Style x:Key="GlobalWordEditButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="Black"/>
-        <Setter Property="Foreground" Value="#FFBFA730"/>
+        <Setter Property="BorderBrush" Value="#FF797979"/>
+        <Setter Property="Foreground" Value="#FFF9CF01"/>
         <Setter Property="Margin" Value="4,4"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -159,7 +159,7 @@
     <Style x:Key="GlobalWordRemoveButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderBrush" Value="#FF797979"/>
         <Setter Property="Foreground" Value="#FFA61A00"/>
         <Setter Property="Margin" Value="4,4"/>
         <Setter Property="BorderThickness" Value="1"/>
