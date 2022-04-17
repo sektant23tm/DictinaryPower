@@ -12,7 +12,7 @@
         Title="{Binding Title}" 
         Height="450" 
         Width="800"
-        MinWidth="650">
+        MinWidth="650" FontSize="14">
     <Window.Resources>
         <Run Text="Test" x:Key="Bobo"/>
     </Window.Resources>
@@ -24,7 +24,7 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250" MinWidth="250"/>
+                <ColumnDefinition Width="260" MinWidth="250"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -89,6 +89,12 @@
                                                 </DataTemplate>
                                             </ComboBox.ItemTemplate>
                                         </ComboBox>
+
+                                        <Button Style="{DynamicResource ButtonAddPartGWordStyle}" 
+                                                Margin="0,5,0,3"
+                                                Padding="5,3,5,3"
+                                                ToolTip="Добавить блок перевода"/>
+
                                     </StackPanel>
                                     <Border BorderThickness="0,1,0,0" BorderBrush="Gray"/>
 
@@ -100,9 +106,17 @@
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel>
-                                                    <TextBox Text="{Binding Value}"
-                                                          Margin="7,5,2,5"
-                                                          FontWeight="Medium"/>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBox Text="{Binding Value}"
+                                                                 Margin="7,5,2,5"
+                                                                 FontWeight="Medium"/>
+
+                                                        <Button Style="{DynamicResource ButtonAddPartGWordStyle}" 
+                                                                Margin="0,6,0,2"
+                                                                Padding="5,3,5,3"
+                                                                ToolTip="Добавить блок предложений-примеров к переводу"/>
+                                                        
+                                                    </StackPanel>
                                                     <StackPanel>
                                                         <ItemsControl ItemsSource="{Binding ExampleSentences}">
                                                             <ItemsControl.ItemTemplate>
@@ -111,7 +125,7 @@
                                                                         <TextBox Text="{Binding EnglishSentence , StringFormat='- {0}'}"
                                                                              Margin="5,4,2,0"/>
                                                                         <TextBox Text="{Binding RussianSentence , StringFormat='- {0}'}"
-                                                                             Margin="5,0,2,5"/>
+                                                                             Margin="5,1,2,5"/>
                                                                     </StackPanel>
                                                                 </DataTemplate>
                                                             </ItemsControl.ItemTemplate>
