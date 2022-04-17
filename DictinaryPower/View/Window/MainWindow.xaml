@@ -31,7 +31,13 @@
             <DockPanel Grid.Column="0">
                 <DockPanel DockPanel.Dock="Top">
                     <fa:ImageAwesome Icon="Solid_Search" Height="15" Margin="8,1,5,1" Foreground="#FF0C2E98"/>
-                    <ext:WatermarkTextBox Watermark="Строка поиска" BorderThickness="1" BorderBrush="Gray" Margin="5" DockPanel.Dock="Right"/>
+                    <ext:WatermarkTextBox 
+                        Watermark="Строка поиска" 
+                        Text="{Binding TextSearch , UpdateSourceTrigger = PropertyChanged}"
+                        BorderThickness="1" 
+                        BorderBrush="Gray" 
+                        Margin="5" 
+                        DockPanel.Dock="Right"/>
                 </DockPanel>
                 <UniformGrid Rows="1" DockPanel.Dock="Bottom" Margin="0 0 0 4">
                     <Button Content="Add"  Style="{DynamicResource GlobalWordAddButtonStyle}"/>
@@ -39,7 +45,7 @@
                     <Button Content="Remove" Style="{DynamicResource GlobalWordRemoveButtonStyle}" Command="{Binding RemoveGlobalWordCommand}"/>
                 </UniformGrid>
                 <ListBox 
-                    ItemsSource="{Binding DebugGlobalWordCollection}"
+                    ItemsSource="{Binding GlobalWordViewSource}"
                     SelectedItem="{Binding SelectedGlobalWord}"
                     SelectedIndex="0"
                     Margin="5">

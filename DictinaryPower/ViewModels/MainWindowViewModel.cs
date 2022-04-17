@@ -2,8 +2,12 @@
 using DictinaryPower.Infrastructure.Commands;
 using DictinaryPower.Infrastructure.Debug;
 using DictinaryPower.ViewModels.Base;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace DictinaryPower.ViewModels
@@ -38,7 +42,12 @@ namespace DictinaryPower.ViewModels
         public IEnumerable<GlobalWord> DebugGlobalWordCollection
         {
             get => _DebugGlobalWordCollection;
-            set => Set(ref _DebugGlobalWordCollection, value);
+            set
+            {
+                if (!Set(ref _DebugGlobalWordCollection, value)) return;
+                _GlobalWordViewSource.Source = value ?? null;
+                OnPropertyChanged(nameof(GlobalWordViewSource));
+            }
         }
         #endregion
 
@@ -64,6 +73,34 @@ namespace DictinaryPower.ViewModels
         }
         #endregion
 
+        #region TextSearch : string - Строка поиска внутри ListBox
+        /// <summary>Строка поиска внутри ListBox</summary>
+        private string _TextSearch;
+        /// <summary>Строка поиска внутри ListBox</summary>
+        public string TextSearch
+        {
+            get => _TextSearch;
+            set
+            {
+                if (!Set(ref _TextSearch, value)) return;
+                _GlobalWordViewSource.View.Refresh();
+            }
+        }
+        #endregion
+
+        #region GlobalWordFilter
+        private readonly CollectionViewSource _GlobalWordViewSource = new CollectionViewSource();
+        public ICollectionView GlobalWordViewSource => _GlobalWordViewSource?.View;
+        private void OnGlobalWordFiltered(object sender, FilterEventArgs e)
+        {
+            if (!(e.Item is GlobalWord gWord)) return;
+            if (string.IsNullOrWhiteSpace(TextSearch)) return;
+
+            if (gWord.Value.Contains(TextSearch, StringComparison.OrdinalIgnoreCase)) return;
+            e.Accepted = false;
+        }
+        #endregion
+
         #endregion
 
         #region Команды
@@ -82,10 +119,6 @@ namespace DictinaryPower.ViewModels
 
         #endregion
 
-        #region Сервисы
-
-        #endregion
-
         public MainWindowViewModel()
         {
             #region Инициализация команд
@@ -97,6 +130,10 @@ namespace DictinaryPower.ViewModels
             DebugGlobalWordCollection = _debugGlobalWordService.Items;
             DebugPartOfSpeechCollection = _debugGlobalWordService.PartOfSpeeches;
             SelectedGlobalWord = DebugGlobalWordCollection.ToArray()[0];
+            #endregion
+
+            #region Инициализация событий
+            _GlobalWordViewSource.Filter += OnGlobalWordFiltered;
             #endregion
         }
 
