@@ -1,4 +1,5 @@
-﻿using DictinaryPower.Services;
+﻿using DictinaryPower.Data;
+using DictinaryPower.Services;
 using DictinaryPower.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +26,7 @@ namespace DictinaryPower
         public static IServiceProvider Services => Host.Services;
 
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
+            .AddDatabase(host.Configuration.GetSection("Database"))
             .AddViewModels()
             .AddServices();
 
