@@ -15,7 +15,7 @@ namespace DictinaryPower.DAL.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.16")
+                .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("DictinaryPower.DAL.Entitiyes.ExampleSentence", b =>
@@ -104,7 +104,6 @@ namespace DictinaryPower.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Forms")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GlobalWordId")
@@ -114,7 +113,6 @@ namespace DictinaryPower.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Transcription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Value")

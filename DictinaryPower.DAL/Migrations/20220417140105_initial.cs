@@ -2,7 +2,7 @@
 
 namespace DictinaryPower.DAL.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,8 +41,8 @@ namespace DictinaryPower.DAL.Migrations
                     GlobalWordId = table.Column<int>(type: "int", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PartSpeechId = table.Column<int>(type: "int", nullable: false),
-                    Transcription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Forms = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Transcription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Forms = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

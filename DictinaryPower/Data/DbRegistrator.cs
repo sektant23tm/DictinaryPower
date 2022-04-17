@@ -19,6 +19,8 @@ namespace DictinaryPower.Data
                 if (type != "MSSQL") throw new InvalidOperationException($"Тип подключения {type} не поддерживается");
 
                 opt.UseSqlServer(configuration.GetConnectionString(type));
-            });
+            })
+            .AddTransient<DbInitializer>()
+            ;
     }
 }

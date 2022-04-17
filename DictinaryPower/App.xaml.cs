@@ -26,15 +26,20 @@ namespace DictinaryPower
         public static IServiceProvider Services => Host.Services;
 
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
-            .AddDatabase(host.Configuration.GetSection("Database"))
             .AddViewModels()
-            .AddServices();
+            .AddServices()
+            .AddDatabase(host.Configuration.GetSection("Database"));
 
-        protected override async void OnStartup(StartupEventArgs e)
+        protected async override void OnStartup(StartupEventArgs e)
         {
             IsDesignMode = false;
             var host = Host;
-            base.OnStartup(e);
+
+            //Инициализация БД и заполнение тестовыми даными
+            using (var scope = Services.CreateScope())
+                scope.ServiceProvider.GetRequiredService<DbInitializer>().InitializeAsync().Wait();
+
+                base.OnStartup(e);
             await host.StartAsync();
         }
 

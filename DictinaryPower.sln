@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictinaryPower", "DictinaryPower\DictinaryPower.csproj", "{3F21F379-1519-4F38-BDA4-00DB563DD112}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DictinaryPower", "DictinaryPower\DictinaryPower.csproj", "{3F21F379-1519-4F38-BDA4-00DB563DD112}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictinaryPower.DAL", "DictinaryPower.DAL\DictinaryPower.DAL.csproj", "{3D7DF1C0-0898-40FF-A5C8-731FC615E25D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DictinaryPower.DAL", "DictinaryPower.DAL\DictinaryPower.DAL.csproj", "{3D7DF1C0-0898-40FF-A5C8-731FC615E25D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
