@@ -3,9 +3,7 @@ using DictinaryPower.DAL.Entitiyes.Base;
 using DictinaryPower.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -52,7 +50,7 @@ namespace DictinaryPower.DAL.Repositories
             return entity;
         }
 
-        public T Get(int id) => Items.SingleOrDefault(i => i.Id == id);
+        public virtual T Get(int id) => Items.SingleOrDefault(i => i.Id == id);
 
         public async Task<T> GetAsync(int id , CancellationToken cancel = default) => await Items
             .SingleOrDefaultAsync(i => i.Id == id , cancel)
@@ -100,6 +98,16 @@ namespace DictinaryPower.DAL.Repositories
                 await _db.SaveChangesAsync(cancel).ConfigureAwait(false);
 
             return entity;
+        }
+
+        public void Save()
+        {
+            _db.SaveChanges();
+        }
+
+        public async void SaveAsync(CancellationToken cancel = default)
+        {
+            await _db.SaveChangesAsync(cancel).ConfigureAwait(false);
         }
     }
 }

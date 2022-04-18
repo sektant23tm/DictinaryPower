@@ -14,6 +14,9 @@ namespace DictinaryPower.DAL.Repositories.Interfaces
         T Update(T entity);
         void Remove(int id);
 
+        void Save();
+        void SaveAsync(CancellationToken cancel = default);
+
         Task<T> GetAsync(int id, CancellationToken cancel = default);
         Task<T> AddAsync(T entity, CancellationToken cancel = default);
         Task<T> UpdateAsync(T entity, CancellationToken cancel = default);

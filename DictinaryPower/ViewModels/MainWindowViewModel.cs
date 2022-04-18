@@ -1,4 +1,5 @@
 ﻿using DictinaryPower.DAL.Entitiyes;
+using DictinaryPower.DAL.Repositories.Interfaces;
 using DictinaryPower.Infrastructure.Commands;
 using DictinaryPower.Infrastructure.Debug;
 using DictinaryPower.ViewModels.Base;
@@ -119,7 +120,9 @@ namespace DictinaryPower.ViewModels
 
         #endregion
 
-        public MainWindowViewModel()
+        IRepository<GlobalWord> _gWordRepository;
+
+        public MainWindowViewModel(IRepository<GlobalWord> gWordRepository)
         {
             #region Инициализация команд
             RemoveGlobalWordCommand = new LambdaCommand(OnRemoveGlobalWordCommandExecuted, CanRemoveGlobalWordCommandExecute);
@@ -134,6 +137,12 @@ namespace DictinaryPower.ViewModels
 
             #region Инициализация событий
             _GlobalWordViewSource.Filter += OnGlobalWordFiltered;
+            _gWordRepository = gWordRepository;
+
+            var words = gWordRepository.Items.ToArray();
+
+            var word = gWordRepository.Get(1);
+
             #endregion
         }
 

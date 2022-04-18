@@ -1,10 +1,9 @@
 ﻿using DictinaryPower.DAL.Context;
+using DictinaryPower.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DictinaryPower.Data
 {
@@ -21,6 +20,7 @@ namespace DictinaryPower.Data
                 opt.UseSqlServer(configuration.GetConnectionString(type));
             })
             .AddTransient<DbInitializer>()
+            .AddRepositoryInDB()
             ;
     }
 }
