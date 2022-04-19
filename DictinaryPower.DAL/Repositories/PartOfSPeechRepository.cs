@@ -8,7 +8,5 @@ namespace DictinaryPower.DAL.Repositories
     internal class PartOfSPeechRepository : DbRepository<PartOfSpeech>
     {
         public PartOfSPeechRepository(DictinaryDB db) : base(db) { }
-
-        public override IQueryable<PartOfSpeech> Items => base.Items.Include(p => p.Words);
     }
 }

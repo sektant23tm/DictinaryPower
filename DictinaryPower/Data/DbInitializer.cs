@@ -26,10 +26,12 @@ namespace DictinaryPower.Data
             var timer = Stopwatch.StartNew();
             _logger.LogInformation("Инициализация БД");
 
-            await _db.Database.EnsureDeletedAsync().ConfigureAwait(false);
+            _logger.LogInformation("Миграция БД...");
             await _db.Database.MigrateAsync().ConfigureAwait(false);
+            _logger.LogInformation("Миграция БД выполнена за {0} мс", timer.ElapsedMilliseconds);
 
-            if (await _db.Words.AnyAsync()) return;
+            if (await _db.Words.AnyAsync()) 
+                return;
 
             await InitializeGlobalWordsAsync();
             await InitializePathOfSpeechesAsync();

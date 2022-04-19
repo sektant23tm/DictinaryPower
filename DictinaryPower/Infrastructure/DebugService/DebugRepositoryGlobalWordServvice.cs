@@ -6,7 +6,7 @@ namespace DictinaryPower.Infrastructure.Debug
 {
     internal class DebugRepositoryGlobalWordServvice
     {
-        public IEnumerable<GlobalWord> Items { get; }
+        public IEnumerable<GlobalWord> GWords { get; }
 
         public IEnumerable<PartOfSpeech> PartOfSpeeches { get; }
 
@@ -25,7 +25,7 @@ namespace DictinaryPower.Infrastructure.Debug
                  new PartOfSpeech { Name = "Particle" }
             };
 
-            Items = new List<GlobalWord>()
+            GWords = new List<GlobalWord>()
             {
                 new GlobalWord
                 {

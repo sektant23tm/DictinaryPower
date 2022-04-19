@@ -16,11 +16,8 @@ namespace DictinaryPower.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
         #region Сервисы
-        private readonly DebugRepositoryGlobalWordServvice _debugGlobalWordService;
-        #endregion
-
-        #region Константы
-
+        private readonly IRepository<GlobalWord> _gWordRepository;
+        IRepository<PartOfSpeech> _partOfSpeechRepository;
         #endregion
 
         #region Свойства
@@ -36,30 +33,30 @@ namespace DictinaryPower.ViewModels
         }
         #endregion
 
-        #region DebugGlobalWordCollection : IEnumerable<GlobalWord> - Коллекция слов-примернов чтобы успешно дебажить визуальную часть
-        /// <summary>Коллекция слов-примернов чтобы успешно дебажить визуальную часть</summary>
-        private IEnumerable<GlobalWord> _DebugGlobalWordCollection;
-        /// <summary>Коллекция слов-примернов чтобы успешно дебажить визуальную часть</summary>
-        public IEnumerable<GlobalWord> DebugGlobalWordCollection
+        #region GlobalWordCollection : IEnumerable<GlobalWord> - Коллекция слов GWord из БД
+        /// <summary>Коллекция слов GWord из БД</summary>
+        private IEnumerable<GlobalWord> _GlobalWordCollection;
+        /// <summary>Коллекция слов GWord из БД</summary>
+        public IEnumerable<GlobalWord> GlobalWordCollection
         {
-            get => _DebugGlobalWordCollection;
+            get => _GlobalWordCollection;
             set
             {
-                if (!Set(ref _DebugGlobalWordCollection, value)) return;
+                if (!Set(ref _GlobalWordCollection, value)) return;
                 _GlobalWordViewSource.Source = value ?? null;
                 OnPropertyChanged(nameof(GlobalWordViewSource));
             }
         }
         #endregion
 
-        #region DebugPartOfSpeechCollection : Ienumerable<partOfSpeech> - Коллекция частей речи , чтобы успешно дебажить визуальную часть
-        /// <summary>Коллекция частей речи , чтобы успешно дебажить визуальную часть</summary>
-        private IEnumerable<PartOfSpeech> _DebugPartOfSpeechCollection;
-        /// <summary>Коллекция частей речи , чтобы успешно дебажить визуальную часть</summary>
-        public IEnumerable<PartOfSpeech> DebugPartOfSpeechCollection
+        #region PartOfSpeechCollection : IEnumerable<PartOfSpeech> - Коллекция частей речи из БД
+        /// <summary>Коллекция частей речи из БД</summary>
+        private IEnumerable<PartOfSpeech> _PartOfSpeechCollection;
+        /// <summary>Коллекция частей речи из БД</summary>
+        public IEnumerable<PartOfSpeech> PartOfSpeechCollection
         {
-            get => _DebugPartOfSpeechCollection;
-            set => Set(ref _DebugPartOfSpeechCollection, value);
+            get => _PartOfSpeechCollection;
+            set => Set(ref _PartOfSpeechCollection, value);
         }
         #endregion
 
@@ -69,7 +66,16 @@ namespace DictinaryPower.ViewModels
         /// <summary>Выбранный в основном листБоксе GlobalWord</summary>
         public GlobalWord SelectedGlobalWord
         {
-            get => _SelectedGlobalWord;
+            get
+            {
+                if (_SelectedGlobalWord is null)
+                    return null;
+
+                if (_SelectedGlobalWord.Words is null)
+                    _SelectedGlobalWord = _gWordRepository.Get(_SelectedGlobalWord.Id);
+
+                return _SelectedGlobalWord;
+            }
             set => Set(ref _SelectedGlobalWord, value);
         }
         #endregion
@@ -120,32 +126,36 @@ namespace DictinaryPower.ViewModels
 
         #endregion
 
-        IRepository<GlobalWord> _gWordRepository;
+        public MainWindowViewModel()
+        {
+            if (App.IsDesignMode == false)
+                throw new InvalidOperationException("Данный конструктор не предназначен для работы в дизанере");
 
-        public MainWindowViewModel(IRepository<GlobalWord> gWordRepository)
+            var testData = new DebugRepositoryGlobalWordServvice();
+            GlobalWordCollection = testData.GWords;
+            PartOfSpeechCollection = testData.PartOfSpeeches;
+        }
+
+
+        public MainWindowViewModel(IRepository<GlobalWord> gWordRepository, IRepository<PartOfSpeech> partOfSpeechRepository)
         {
             #region Инициализация команд
             RemoveGlobalWordCommand = new LambdaCommand(OnRemoveGlobalWordCommandExecuted, CanRemoveGlobalWordCommandExecute);
             #endregion
 
             #region Инициализация сервисов
-            _debugGlobalWordService = new DebugRepositoryGlobalWordServvice();
-            DebugGlobalWordCollection = _debugGlobalWordService.Items;
-            DebugPartOfSpeechCollection = _debugGlobalWordService.PartOfSpeeches;
-            SelectedGlobalWord = DebugGlobalWordCollection.ToArray()[0];
+            _gWordRepository = gWordRepository;
+            _partOfSpeechRepository = partOfSpeechRepository;
+            #endregion
+
+            #region Инициализация свойств
+            GlobalWordCollection = _gWordRepository.Items.ToArray();
+            PartOfSpeechCollection = _partOfSpeechRepository.Items.ToArray();
             #endregion
 
             #region Инициализация событий
             _GlobalWordViewSource.Filter += OnGlobalWordFiltered;
-            _gWordRepository = gWordRepository;
-
-            var words = gWordRepository.Items.ToArray();
-
-            var word = gWordRepository.Get(1);
-
             #endregion
         }
-
-
     }
 }

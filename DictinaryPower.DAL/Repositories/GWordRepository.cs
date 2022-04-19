@@ -7,11 +7,10 @@ namespace DictinaryPower.DAL.Repositories
 {
     internal class GWordRepository : DbRepository<GlobalWord>
     {
-        public GWordRepository(DictinaryDB db) : base(db) { }
+        private readonly DbSet<GlobalWord> _set;
+        public GWordRepository(DictinaryDB db) : base(db) => _set = db.Set<GlobalWord>();
 
-        //public override IQueryable<GlobalWord> Items => base.Items.Include(i => i.Words);
-
-        public override GlobalWord Get(int id) => Items
+        public override GlobalWord Get(int id) => _set
             .Include(w => w.Words)
             .ThenInclude(p => p.PartSpeech)
             .Include(w => w.Words)

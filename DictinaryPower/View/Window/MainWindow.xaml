@@ -8,7 +8,7 @@
         xmlns:vm="clr-namespace:DictinaryPower.ViewModels"  
         xmlns:ext="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:dal="clr-namespace:DictinaryPower.DAL.Entitiyes;assembly=DictinaryPower.DAL"  
-        DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
+        DataContext="{Binding MainWindowViewModel , Source={StaticResource Locator}}"
         Title="{Binding Title}" 
         Height="450" 
         Width="800"
@@ -80,7 +80,7 @@
                                              Margin="4,5,2,5" />
 
                                         <ComboBox Margin="4,3" BorderThickness="0" Style="{StaticResource ComboBoxPartOfSpeechesStyle}"
-                                              ItemsSource="{Binding MainWindowViewModel.DebugPartOfSpeechCollection, Source={StaticResource Locator}}"
+                                              ItemsSource="{Binding MainWindowViewModel.PartOfSpeechCollection, Source={StaticResource Locator}}"
                                               SelectedItem="{Binding PartSpeech}">
 
                                             <ComboBox.ItemTemplate>
